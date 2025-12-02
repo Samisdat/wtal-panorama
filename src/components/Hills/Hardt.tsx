@@ -4,7 +4,7 @@ const hillCss = css`
     fill: #247039;
 `;
 
-export const Hill1310 = () => (
+export const Haardt = () => (
     <path
         className={hillCss}
         data-id="1300"
