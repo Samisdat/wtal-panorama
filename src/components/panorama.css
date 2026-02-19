@@ -385,3 +385,68 @@
 .panorama .clock .clockHandSecond {
     transform: rotate(calc(360deg * var(--second) / 60));
 }
+
+.device-orientation-icon-wrapper {
+    --width: 100px;
+    width: var(--width);
+    aspect-ratio: 1/1;
+    margin: 300px;
+}
+.device-orientation-icon {
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    perspective-origin: 100% 100%;
+}
+
+.device-orientation-icon .device {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    transform-style: preserve-3d;
+    /*
+    animation: device-rotate 6s linear infinite;
+    */
+    transition: transform 100ms linear;
+    transform: rotateX(calc(1deg * var(--x-axis))) rotateY(calc(1deg * var(--y-axis)))
+        rotateZ(calc(1deg * var(--z-axis)));
+}
+
+.device-orientation-icon .device .side {
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 1/1;
+    opacity: 0.9;
+    background: linear-gradient(to right, #09adc8, #001f4e);
+}
+
+.device-orientation-icon .front {
+    transform: translateZ(calc(0.5 * var(--width)));
+}
+
+.device-orientation-icon .back {
+    transform: rotateY(90deg) translateZ(calc(0.5 * var(--width)));
+}
+
+.device-orientation-icon .top {
+    transform: rotateY(180deg) translateZ(calc(0.5 * var(--width)));
+}
+
+.device-orientation-icon .bottom {
+    transform: rotateX(90deg) translateZ(calc(0.5 * var(--width)));
+}
+
+.device-orientation-icon .left {
+    transform: rotateY(-90deg) translateZ(calc(0.5 * var(--width)));
+}
+
+.device-orientation-icon .right {
+    transform: rotateX(-90deg) translateZ(calc(0.5 * var(--width))) rotate(180deg);
+}
+
+@keyframes device-rotate {
+    100% {
+        transform: rotateX(0deg) rotateY(360deg) rotateZ(360deg);
+    }
+}

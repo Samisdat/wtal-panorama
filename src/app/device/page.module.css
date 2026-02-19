@@ -1,0 +1,21 @@
+html {
+    --backgroundcolor: var(--color-aubergine);
+    --maintextcolor: hsl(30 8% 82%);
+    font-size: 20px;
+    background-color: var(--backgroundcolor);
+    color: var(--maintextcolor);
+    font-family: sans-serif;
+}
+body {
+    letter-spacing: 0.01em;
+    margin: 0;
+}
+.page {
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    grid-row-start: 2;
+}
