@@ -385,19 +385,18 @@
 .panorama .clock .clockHandSecond {
     transform: rotate(calc(360deg * var(--second) / 60));
 }
-
+/*
 .device-orientation-icon-wrapper {
-    --width: 100px;
+    --width: 300px;
     width: var(--width);
     aspect-ratio: 1/1;
     margin: 300px;
 }
 .device-orientation-icon {
-    background-color: red;
     width: 100%;
     height: 100%;
     perspective: 1000px;
-    perspective-origin: 100% 100%;
+    perspective-origin: 50% 50%;
 }
 
 .device-orientation-icon .device {
@@ -405,9 +404,6 @@
     width: 100%;
     aspect-ratio: 1/1;
     transform-style: preserve-3d;
-    /*
-    animation: device-rotate 6s linear infinite;
-    */
     transition: transform 100ms linear;
     transform: rotateX(calc(1deg * var(--x-axis))) rotateY(calc(1deg * var(--y-axis)))
         rotateZ(calc(1deg * var(--z-axis)));
@@ -415,38 +411,215 @@
 
 .device-orientation-icon .device .side {
     position: absolute;
-    width: 100%;
-    aspect-ratio: 1/1;
-    opacity: 0.9;
-    background: linear-gradient(to right, #09adc8, #001f4e);
 }
 
-.device-orientation-icon .front {
-    transform: translateZ(calc(0.5 * var(--width)));
+.device-orientation-icon .device .side.front {
+    width: var(--width);
+    height: calc(var(--width) * 2);
+    transform: translateZ(calc(0.05 * var(--width)));
+    background-color: palegoldenrod;
 }
 
-.device-orientation-icon .back {
-    transform: rotateY(90deg) translateZ(calc(0.5 * var(--width)));
+.device-orientation-icon .device .side.back {
+    width: var(--width);
+    height: calc(var(--width) * 2);
+    transform: rotateY(180deg) translateZ(calc(0.05 * var(--width)));
+    background-color: palegoldenrod;
 }
 
-.device-orientation-icon .top {
-    transform: rotateY(180deg) translateZ(calc(0.5 * var(--width)));
+.device-orientation-icon .device .side.top {
+    height: calc(var(--width) * 0.1);
+    width: var(--width);
+    transform: rotateX(90deg) translateZ(calc(0.05 * var(--width))) rotate(180deg);
+    background-color: blue;
 }
 
-.device-orientation-icon .bottom {
-    transform: rotateX(90deg) translateZ(calc(0.5 * var(--width)));
+.device-orientation-icon .device .side.bottom {
+    height: calc(var(--width) * 0.1);
+    width: var(--width);
+    transform: rotateX(-90deg) translateZ(calc(1.95 * var(--width))) rotate(180deg);
+    background-color: blue;
 }
 
-.device-orientation-icon .left {
-    transform: rotateY(-90deg) translateZ(calc(0.5 * var(--width)));
+.device-orientation-icon .device .side.left {
+    width: calc(var(--width) * 0.1);
+    height: calc(var(--width) * 2);
+    transform: rotateY(-90deg) translateZ(calc(0.05 * var(--width)));
+    background-color: lime;
+}
+.device-orientation-icon .device .side.right {
+    width: calc(var(--width) * 0.1);
+    height: calc(var(--width) * 2);
+    transform: rotateY(90deg) translateZ(calc(0.95 * var(--width)));
+    background-color: lime;
 }
 
-.device-orientation-icon .right {
-    transform: rotateX(-90deg) translateZ(calc(0.5 * var(--width))) rotate(180deg);
+.device-orientation-icon .device .x-axis {
+    width: 1000px;
+    height: 100px;
+    transform: rotateZ(90deg);
+
+    background-color: lightcoral;
 }
 
 @keyframes device-rotate {
     100% {
         transform: rotateX(0deg) rotateY(360deg) rotateZ(360deg);
     }
+}
+*/
+
+.device-orientation-icon-wrapper {
+    --w: 200px;
+    --h: calc(var(--w) * 2);
+    --d: calc(var(--w) * 0.1);
+
+    --safe: calc(var(--w) * 2.3);
+
+    width: var(--safe);
+    height: var(--safe);
+
+    display: grid;
+    place-items: center;
+
+    margin: 200px auto;
+
+    background-color: lightcoral;
+}
+
+.device-orientation-icon {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+}
+
+/* ========================= */
+
+.device-orientation-icon .device {
+    position: relative;
+    width: var(--w);
+    height: var(--h);
+
+    transform-style: preserve-3d;
+    will-change: transform;
+
+    transition: transform 120ms linear;
+
+    transform: rotateX(calc(1deg * var(--x-axis))) rotateY(calc(1deg * var(--y-axis)))
+        rotateZ(calc(1deg * var(--z-axis)));
+}
+
+/* ===== Achsen Fix ===== */
+
+.device .axes {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.device .axis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: calc(var(--w) * 1.8);
+    height: 3px;
+
+    transform-origin: center;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+/* X-Achse → links ↔ rechts */
+.device .axis-x {
+    background: rgba(255, 80, 80, 0.9);
+    transform: translate(-50%, -50%);
+}
+
+/* Y-Achse → oben ↕ unten */
+.device .axis-y {
+    background: rgba(80, 255, 120, 0.9);
+    transform: translate(-50%, -50%) rotateZ(90deg);
+}
+
+/* Z-Achse → vorne ↔ hinten */
+.device .axis-z {
+    background: rgba(80, 140, 255, 0.9);
+    transform: translate(-50%, -50%) rotateY(90deg);
+}
+/* ========================= */
+
+.device-orientation-icon .device .side {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform-style: preserve-3d;
+    transform-origin: center;
+
+    backface-visibility: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+/* ========================= */
+/* FRONT / BACK */
+
+.front,
+.back {
+    width: var(--w);
+    height: var(--h);
+}
+
+.front {
+    background: rgba(255, 200, 0, 0.85);
+    transform: translate(-50%, -50%) translateZ(calc(var(--d) / 2));
+}
+
+.back {
+    background: rgba(255, 200, 0, 0.35);
+    transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--d) / 2));
+}
+
+/* ========================= */
+/* LEFT / RIGHT */
+
+.left,
+.right {
+    width: var(--d);
+    height: var(--h);
+}
+
+.right {
+    background: rgba(0, 255, 0, 0.7);
+    transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--w) / 2));
+}
+
+.left {
+    background: rgba(0, 255, 0, 0.4);
+    transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--w) / 2));
+}
+
+/* ========================= */
+/* TOP / BOTTOM */
+
+.top,
+.bottom {
+    width: var(--w);
+    height: var(--d);
+}
+
+.top {
+    background: rgba(0, 120, 255, 0.75);
+    transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--h) / 2));
+}
+
+.bottom {
+    background: rgba(0, 120, 255, 0.45);
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--h) / 2));
 }

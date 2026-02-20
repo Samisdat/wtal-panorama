@@ -65,12 +65,21 @@ export const DeviceorientationIcon = () => {
             >
                 <div className="device-orientation-icon">
                     <div className="device">
-                        <div className="side front">front</div>
-                        <div className="side back">right</div>
-                        <div className="side top">back</div>
-                        <div className="side bottom">top</div>
-                        <div className="side left">left</div>
-                        <div className="side right">bottom</div>
+                        <div
+                            className="axes"
+                            aria-hidden="true"
+                        >
+                            <div className="axis axis-x"></div>
+                            <div className="axis axis-y"></div>
+                            <div className="axis axis-z"></div>
+                        </div>
+
+                        <div className="side front"></div>
+                        <div className="side right"></div>
+                        <div className="side back"></div>
+                        <div className="side top"></div>
+                        <div className="side left"></div>
+                        <div className="side bottom"></div>
                     </div>
                 </div>
             </div>
