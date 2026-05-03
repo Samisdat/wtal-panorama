@@ -500,21 +500,24 @@
 
 /* ========================= */
 
-.device-orientation.device-wrap{
+.device-orientation.device-wrap {
     width: var(--w);
     height: var(--h);
     display: grid;
     place-items: center;
 }
 
-.device-orientation .device{
+.device-orientation .device {
     width: var(--w);
     height: var(--h);
     transform-style: preserve-3d;
     transform-origin: 50% 50% calc(var(--d) / -2);
-    transform: rotateY(calc(1deg * var(--gamma)))
-    rotateX(calc(1deg * var(--beta)))
-    rotateZ(calc(1deg * var(--alpha)));}
+    /*transform: rotateY(calc(1deg * var(--gamma))) rotateX(calc(1deg * var(--beta))) rotateZ(calc(1deg * var(--alpha)));*/
+    /*transform: rotateZ(calc(-1deg * var(--alpha))) rotateX(calc(-1deg * var(--beta))) rotateY(calc(1deg * var(--gamma)));*/
+
+    transform: var(--matrix);
+    transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
 
 /* ===== Achsen Fix ===== */
 

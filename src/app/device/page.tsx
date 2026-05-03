@@ -7,19 +7,11 @@ import { Panorama } from '@/components/Panorama';
 import { TalProvider } from '@/lib/TalContext';
 import styles from './page.module.css';
 
+import '@/components/panorama.css';
 export default function Home() {
     return (
         <>
             <DeviceorientationIcon />
-            <TalProvider>
-                <div className={styles.page}>
-                    <main className={styles.main}>
-                        <Panorama />
-                        <DigitalClock />
-                        <TimeFactor />
-                    </main>
-                </div>
-            </TalProvider>
 
             <main>
                 <h1>Lorem ipsum</h1>
